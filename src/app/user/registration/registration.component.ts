@@ -17,4 +17,7 @@ export class RegistrationComponent {
     password: [''],
     confirmPassword: [''],
   });
+  onSubmit() {
+  console.log(this.form.value);}
 }
+
