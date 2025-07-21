@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { FirstKeyPipe } from '../../shared/pipes/first-key.pipe';
+import { AuthService } from '../../shared/services/auth.service';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { FirstKeyPipe } from '../../shared/pipes/first-key.pipe';
   styles: ``
 })
 export class RegistrationComponent {
-  constructor(public formBuilder: FormBuilder) { }
+  constructor(public formBuilder: FormBuilder, private service: AuthService) { }
   isSubmitted: boolean = false;
 
   passwordMatchValidator: ValidatorFn = (control: AbstractControl): null => {
@@ -39,13 +40,22 @@ export class RegistrationComponent {
 
 
 
-  onSubmit() {
+  onSubmit(){
     this.isSubmitted = true;
-    if (this.form.valid) {
-    console.log(this.form.value);
+    if(this.form.valid){
+      this.service.createUser(this.form.value)
+      .subscribe({
+        next:(res:any)=>{
+          if(res.succeeded){
+            this.form.reset();
+            this.isSubmitted = false;
+          }
+          console.log(res);
+        },
+        error:err=>console.log('error',err)
+      });
     }
   }
-
   hasDisplayableError(controlName: string): Boolean {
     const control = this.form.get(controlName);
     return Boolean(control?.invalid) &&
