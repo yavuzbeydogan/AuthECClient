@@ -3,9 +3,10 @@ body{
       font-family: "Inter", sans-serif;
 
 }
+/* form validation */
 .error-feedback {
-      font-size: 0.9rem;
-      color: red;
-      margin: 0.3rem !important;
-      margin-top: 0.1rem !important;
+  font-size: 0.9rem;
+  color: crimson;
+  margin: 0.3rem !important;
+  margin-top: 0.1rem !important;
 }

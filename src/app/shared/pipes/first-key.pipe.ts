@@ -8,10 +8,9 @@ export class FirstKeyPipe implements PipeTransform {
 
   transform(value: any): string | null {
     const keys = Object.keys(value);
-    if (keys && keys.length > 0) {
+    if (keys && keys.length > 0)
       return keys[0];
-    }
-   return null;
+    return null;
   }
 
 }
