@@ -27,9 +27,11 @@
                 Atleast 6 characters required.
             </div>
             <div *ngIf="form.controls['password'].hasError('pattern')">
-                One or more special character(s).
+                Password must contain at least one uppercase letter, one lowercase letter, one number.
             </div>
         </div>
+
+
     </div>
     <div class="mb-3">
         <input type="text" class="form-control bg-body-secondary" placeholder="Confirm Password" formControlName="confirmPassword">
