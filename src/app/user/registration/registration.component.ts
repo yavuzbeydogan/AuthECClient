@@ -3,11 +3,12 @@ import { Component } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AbstractControl, ValidatorFn } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { FirstKeyPipe } from '../../shared/pipes/first-key.pipe';
 
 @Component({
   selector: 'app-registration',
   standalone: true,
-  imports: [ReactiveFormsModule,CommonModule],
+  imports: [ReactiveFormsModule,CommonModule, FirstKeyPipe],
   templateUrl: './registration.component.html',
   styles: ``
 })

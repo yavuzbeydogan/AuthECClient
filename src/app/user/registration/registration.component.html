@@ -20,18 +20,18 @@
     <div class="mb-3">
         <input type="text" class="form-control bg-body-secondary" placeholder="Password" formControlName="password">
         <div class="error-feedback" *ngIf="hasDisplayableError('password')">
-            <div *ngIf="form.controls['password'].hasError('required')">
-                Please enter your password.
-            </div>
-            <div *ngIf="form.controls['password'].hasError('minlength')">
-                Atleast 6 characters required.
-            </div>
-            <div *ngIf="form.controls['password'].hasError('pattern')">
-                Password must contain at least one uppercase letter, one lowercase letter, one number.
-            </div>
+            <ng-container [ngSwitch]="form.controls['password'].errors | firstKey">
+                <div *ngSwitchCase="'required'">
+                    Please enter your password.
+                </div>
+                <div *ngSwitchCase="'minlength'">
+                    Atleast 6 characters required.
+                </div>
+                <div *ngSwitchCase="'pattern'">
+                    Password must contain at least one uppercase letter, one lowercase letter, one number.
+                </div>
+            </ng-container>
         </div>
-
-
     </div>
     <div class="mb-3">
         <input type="text" class="form-control bg-body-secondary" placeholder="Confirm Password" formControlName="confirmPassword">
