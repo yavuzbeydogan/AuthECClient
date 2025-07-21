@@ -3,13 +3,33 @@
 </div>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="mb-3">
-        <input type="text" class="form-control bg-body-secondary" placeholder="Name" formControlName="fullName">
+        <input type="text" class="form-control bg-body-secondary" placeholder="Full Name" formControlName="fullName">
+        <div class="error-feedback" *ngIf="hasDisplayableError('fullName')&&form.controls['fullName'].hasError('required')">Please enter your full name.</div>
     </div>
     <div class="mb-3">
         <input type="text" class="form-control bg-body-secondary" placeholder="Email" formControlName="email">
-    </div>
+        <div class="error-feedback" *ngIf="hasDisplayableError('email')">
+            <div *ngIf="form.controls['email'].hasError('required')">
+                Please enter your email.
+            </div>
+            <div *ngIf="form.controls['email'].hasError('email')">
+                Please enter a valid email your email.
+            </div>
+        </div>
+        </div>
     <div class="mb-3">
         <input type="text" class="form-control bg-body-secondary" placeholder="Password" formControlName="password">
+        <div class="error-feedback" *ngIf="hasDisplayableError('password')">
+            <div *ngIf="form.controls['password'].hasError('required')">
+                Please enter your password.
+            </div>
+            <div *ngIf="form.controls['password'].hasError('minlength')">
+                Atleast 6 characters required.
+            </div>
+            <div *ngIf="form.controls['password'].hasError('pattern')">
+                One or more special character(s).
+            </div>
+        </div>
     </div>
     <div class="mb-3">
         <input type="text" class="form-control bg-body-secondary" placeholder="Confirm Password" formControlName="confirmPassword">

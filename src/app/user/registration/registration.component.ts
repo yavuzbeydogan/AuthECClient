@@ -2,16 +2,18 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AbstractControl, ValidatorFn } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-registration',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,CommonModule],
   templateUrl: './registration.component.html',
   styles: ``
 })
 export class RegistrationComponent {
   constructor(public formBuilder: FormBuilder) {}
+  isSubmitted :boolean = false;
 
     passwordMatchValidator:ValidatorFn=(control:AbstractControl):null => {
       const password = control.get('password');
@@ -30,6 +32,11 @@ export class RegistrationComponent {
   }, {Validators: this.passwordMatchValidator}
 );
   onSubmit() {
-  console.log(this.form.value);}
+  console.log(this.form.value);
+  this.isSubmitted = true;
 }
-
+  hasDisplayableError(controlName: string): Boolean {
+    const control = this.form.get(controlName);
+    return Boolean(control?.invalid)&&(this.isSubmitted || Boolean(control?.touched));
+}
+}
