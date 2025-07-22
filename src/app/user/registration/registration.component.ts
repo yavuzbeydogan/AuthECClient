@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { FirstKeyPipe } from '../../shared/pipes/first-key.pipe';
 import { AuthService } from '../../shared/services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { AuthService } from '../../shared/services/auth.service';
   styles: ``
 })
 export class RegistrationComponent {
-  constructor(public formBuilder: FormBuilder, private service: AuthService) { }
+  constructor(public formBuilder: FormBuilder, private service: AuthService, private toastr:ToastrService) { }
   isSubmitted: boolean = false;
 
   passwordMatchValidator: ValidatorFn = (control: AbstractControl): null => {
@@ -49,8 +50,10 @@ export class RegistrationComponent {
           if(res.succeeded){
             this.form.reset();
             this.isSubmitted = false;
+            this.toastr.success('New user created!', 'Success');
           }
-          console.log(res);
+          else 
+          console.log('response:', res);
         },
         error:err=>console.log('error',err)
       });
