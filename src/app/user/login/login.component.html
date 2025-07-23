@@ -1,1 +1,16 @@
-<p>login works!</p>
+<div class="mb-4 ">
+  <h2 class="text-success">Sign in</h2>
+</div>
+<form [formGroup]="form">
+    <div class="mb-3">
+        <input class="form-control bg-body-secondary" placeholder="Email" formControlName="email">
+    </div>
+    <div class="mb-3">
+        <input class="form-control bg-body-secondary" placeholder="Password" formControlName="password">
+    </div>
+    <div class="mt-4">
+        <button type="submit" class="btn btn-success w-100 rounded-3">
+        Login
+        </button>
+    </div>
+</form>
