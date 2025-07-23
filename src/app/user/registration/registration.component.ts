@@ -43,6 +43,8 @@ export class RegistrationComponent {
 
 
   onSubmit(){
+    console.log("magur");
+    console.log('form:', this.form.value);
     this.isSubmitted = true;
     if(this.form.valid){
       this.service.createUser(this.form.value)
