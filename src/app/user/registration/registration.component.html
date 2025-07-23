@@ -1,6 +1,10 @@
 <div class="mb-4 ">
   <h2 class="text-success">Sign up</h2>
+  <div>Already have an account?
+  <a routerLink="/signin" class="text-decoration-none fw-medium text-success d-inline-block">Sign in</a>
 </div>
+</div>
+
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="mb-3">
     <input class="form-control bg-body-secondary" placeholder="Full Name" formControlName="fullName">
