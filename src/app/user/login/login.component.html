@@ -4,7 +4,7 @@
   <a routerLink="/signup" class="text-decoration-none fw-medium text-success d-inline-block">Sign up</a>
 </div>
 </div>
-<form [formGroup]="form">
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="mb-3">
         <input class="form-control bg-body-secondary" placeholder="Email" formControlName="email">
             <div class="error-feedback" *ngIf="hasDisplayableError('email') && form.controls['email'].hasError('required')">

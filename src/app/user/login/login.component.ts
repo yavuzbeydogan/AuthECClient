@@ -22,4 +22,11 @@ export class LoginComponent {
     return Boolean(control?.invalid) &&
       (this.isSubmitted || Boolean(control?.touched)|| Boolean(control?.dirty))
   }
+  onSubmit() {
+    this.isSubmitted = true;
+    if (this.form.valid) {
+      console.log(this.form.value);
+      // Here you would typically handle the login logic, e.g., call a service to authenticate the user
+    }
+  }
 }
