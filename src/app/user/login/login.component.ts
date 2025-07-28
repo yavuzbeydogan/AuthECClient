@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../shared/services/auth.service';
@@ -12,11 +12,16 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './login.component.html',
   styles: ``
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   constructor(public FormBuilder:FormBuilder, 
   private service:AuthService,
   private router:Router,
   private toastr:ToastrService) {}
+  ngOnInit(): void {
+    if(this.service.isLoggedIn()) {
+      this.router.navigateByUrl('/dashboard');
+    }
+  }
   isSubmitted: boolean = false;
   form=this.FormBuilder.group({
     email: ['', Validators.required],
@@ -32,6 +37,7 @@ export class LoginComponent {
     if (this.form.valid) {
       this.service.signin(this.form.value).subscribe({
         next: (res: any) => {
+          this.service.saveToken(res.token);
           localStorage.setItem('token', res.token);
           this.router.navigateByUrl('/dashboard');
     },
